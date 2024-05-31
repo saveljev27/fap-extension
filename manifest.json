@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Faphouse Extension",
+  "description": "Reason, co-performer declines. Email and Panel tab in SP.",
+  "version": "0.2.0",
+  "action": {
+    "default_icon": "images/faphouse_16.png",
+    "default_popup": "html/index.html"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "icons": {
+    "16": "images/faphouse_16.png",
+    "32": "images/faphouse_32.png",
+    "48": "images/faphouse_48.png",
+    "128": "images/faphouse_128.png"
+  },
+  "permissions": ["scripting", "sidePanel"],
+  "side_panel": {
+    "default_path": "html/sidepanel.html"
+  },
+  "host_permissions": [
+    "https://panel.sexflix.com/*",
+    "https://support.faphouse.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/script.js", "scripts/sp.js"],
+      "css": ["css/styles.css"]
+    }
+  ]
+}

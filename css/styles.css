@@ -1,0 +1,107 @@
+* {
+  text-decoration: none;
+  border: 0;
+}
+.poppup {
+  height: 400px;
+  width: 350px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+h2 {
+  text-align: center;
+}
+.header {
+  display: flex;
+  background-color: #000;
+  padding: 5px 10px;
+  align-items: center;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+.header_title {
+  color: white;
+}
+.links {
+  height: 50px;
+  margin-top: 10px;
+}
+button,
+.link {
+  font-size: 16px;
+  background-color: #000;
+  padding: 3px 6px;
+  color: #fff;
+  border-radius: 5px;
+}
+button:hover,
+.link:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+.link:active {
+  color: red;
+}
+.interactive {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.reason_button {
+  padding: 5px 10px;
+  font-size: 26px;
+}
+.reason_title {
+  text-align: left;
+}
+.reason_subtitle {
+  color: red;
+  font-size: 16px;
+  font-weight: 600;
+}
+.reason_text {
+  font-size: 14px;
+}
+.reason_text:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+.copied_message,
+.copied_email {
+  display: none;
+  margin-left: 10px;
+  font-style: italic;
+}
+.copied_email {
+  color: white;
+}
+.copied_message {
+  color: red;
+}
+.copied_message.show,
+.copied_email.show {
+  display: inline;
+}
+.tab_producer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  gap: 10px;
+}
+.tab_producer_email {
+  display: flex;
+  cursor: pointer;
+}
+.tab_producer_email:hover {
+  opacity: 80%;
+}
+.block_cursor {
+  pointer-events: none;
+}
