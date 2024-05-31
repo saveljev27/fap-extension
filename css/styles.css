@@ -16,7 +16,7 @@ nav {
 h2 {
   text-align: center;
 }
-.header {
+.poppup_header {
   display: flex;
   background-color: #000;
   padding: 5px 10px;

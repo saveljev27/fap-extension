@@ -1,5 +1,8 @@
-Сделаны фиксы и добавлен новый tab (Email and Panel) в тикетах SP.
+0.2.0
+Upd:Сделаны фиксы и добавлен 
+New:Новый tab (Email and Panel) в тикетах SP.
 
+Upd:
 1. Email: Копируется по клику и также есть исчезающее уведомление Copied.
 2. User panel: Переходит по ссылке в панель Users-List https://panel.sexflix.com/user/manage/index?uid=&xUserId=&email= + Email.
 3. Producer panel: Делает запрос с использованием email и возвращает ID. ID использует для ссылки:
@@ -8,3 +11,9 @@ https://panel.sexflix.com/producer/manage/update?id= + ID. В панели Datab
 
 Также больше не должно возникать ошибок во вкладке с расширением.
 Чтобы обновить расширение нужно удалить Faphouse Widget 1.0 и Загрузить Распакованное расширение Faphouse Extension 0.2.0
+
+--- 
+
+0.2.1
+Upd: Убирает баг со смещением header. 
+Upd: Применяет скрипты только на https://panel.sexflix.com/* и https://support.faphouse.com/*
