@@ -2,19 +2,13 @@
   text-decoration: none;
   border: 0;
 }
-.poppup {
-  height: 400px;
-  width: 350px;
-}
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
-}
+/* Poppup */
 h2 {
   text-align: center;
+}
+.poppup {
+  height: 550px;
+  width: 350px;
 }
 .poppup_header {
   display: flex;
@@ -25,38 +19,65 @@ h2 {
   align-items: center;
   justify-content: center;
 }
-.header_title {
-  color: white;
-}
+/* Poppup Links */
 .links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
   height: 50px;
   margin-top: 10px;
 }
-button,
 .link {
   font-size: 16px;
   background-color: #000;
-  padding: 3px 6px;
   color: #fff;
   border-radius: 5px;
 }
-button:hover,
+.link {
+  padding: 3px 6px;
+}
 .link:hover {
   opacity: 80%;
   cursor: pointer;
 }
-.link:active {
-  color: red;
-}
 .interactive {
   margin-top: 15px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }
+
+/* Poppup Queue */
+.queue_field {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin-top: 5px;
+}
+.queue_link {
+  color: #000;
+}
+.loading_icon {
+  height: 10px;
+  width: 10px;
+}
+.main {
+  font-weight: bold;
+}
+.secondary {
+  margin-left: 10px;
+}
+.queue_link:hover,
+.tab_producer_email:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+
+/* Sidepanel */
 .reason_button {
   padding: 5px 10px;
-  font-size: 26px;
 }
 .reason_title {
   text-align: left;
@@ -67,11 +88,18 @@ button:hover,
   font-weight: 600;
 }
 .reason_text {
-  font-size: 14px;
+  font-size: 16px;
 }
+.reason_button:hover,
 .reason_text:hover {
   cursor: pointer;
   opacity: 80%;
+}
+.reason_button {
+  font-size: 16px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 5px;
 }
 .copied_message,
 .copied_email {
@@ -89,6 +117,8 @@ button:hover,
 .copied_email.show {
   display: inline;
 }
+
+/* SP */
 .tab_producer {
   display: flex;
   flex-direction: column;
@@ -97,10 +127,6 @@ button:hover,
 }
 .tab_producer_email {
   display: flex;
-  cursor: pointer;
-}
-.tab_producer_email:hover {
-  opacity: 80%;
 }
 .block_cursor {
   pointer-events: none;

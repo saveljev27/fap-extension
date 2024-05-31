@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Faphouse Extension",
-  "description": "Reason, co-performer declines. Email and Panel tab in SP.",
-  "version": "0.2.1",
+  "description": "Reason, co-performer declines. Email and Panel tab in SP. Video queue",
+  "version": "0.2.2",
   "action": {
     "default_icon": "images/faphouse_16.png",
     "default_popup": "html/index.html"
@@ -30,7 +30,7 @@
         "https://panel.sexflix.com/*",
         "https://support.faphouse.com/*"
       ],
-      "js": ["scripts/script.js", "scripts/sp.js"],
+      "js": ["scripts/script.js", "scripts/sp.js", "scripts/parser.js"],
       "css": ["css/styles.css"]
     }
   ]

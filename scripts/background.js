@@ -36,3 +36,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 });
+
+// Queue request
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchQuanity') {
+    fetchPageContent(request.url)
+      .then((html) => sendResponse({ html }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
+
+async function fetchPageContent(url) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'text/html',
+    },
+  });
+  return response.text();
+}
