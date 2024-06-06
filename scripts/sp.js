@@ -1,29 +1,33 @@
 // Format email function
 const emailFormating = (email) => {
   const emailRedex = /[\w.-]+@[\w.-]+\.\w+/;
-  const match = email.match(emailRedex)[0];
-  return match ? match : 'Email not found';
+  const match = email.match(emailRedex);
+  return match ? match[0] : 'Email not found';
 };
-// Copy functionality to producer email
-const copyTextToClipboard = (text) => {
-  navigator.clipboard.writeText(text).catch((error) => {
-    console.log(error);
-  });
+// Copy email to clipboard functionality
+const copyEmailToClipboard = async (text) => {
+  try {
+    navigator.clipboard.writeText(text);
+  } catch (error) {
+    console.log('Failed to copy');
+  }
 };
+// Copy producer email from tabBlockProducer
 const copyProducerEmail = (producerEmail) => {
   const copiedMessage = document.createElement('span');
   copiedMessage.textContent = 'Copied';
   copiedMessage.classList.add('copied_message');
-  tabBlockProducer.appendChild(producerEmail);
+
   producerEmail.addEventListener('click', () => {
     const emailElement = producerEmail.childNodes[0].nodeValue.trim();
-    copyTextToClipboard(emailElement);
+    copyEmailToClipboard(emailElement);
     producerEmail.appendChild(copiedMessage);
     copiedMessage.classList.add('show');
 
     setTimeout(() => {
       copiedMessage.classList.remove('show');
-    }, 1500);
+      producerEmail.removeChild(copiedMessage);
+    }, 500);
   });
 };
 
@@ -48,43 +52,40 @@ if (findBlockElement) {
   }
 }
 
-// Get Id from GET request promise
-const getUserId = (email) => {
+const getUserId = async (email) => {
   const url =
     'https://panel.sexflix.com/producer/search/for-select2?q=' + email;
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(
-      { action: 'fetchData', url: url },
-      (response) => {
-        if (response.error) {
-          reject(response.error);
-        } else {
-          try {
-            const id = response.data.results[0].id;
-            resolve(id);
-          } catch (e) {
-            reject('Data parsing error');
-          }
-        }
-      }
-    );
+  const response = await chrome.runtime.sendMessage({
+    action: 'fetchData',
+    url: url,
   });
+  if (response.error) {
+    throw new Error(response.error);
+  }
+  try {
+    const id = response.data.results[0].id;
+    return id;
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 // Using getUserId response to redirect on panel page
 const fetchAndCreateLink = async (email) => {
   const goToProdPanel = document.createElement('a');
+  goToProdPanel.className = 'loading_link';
+  goToProdPanel.textContent = 'Loading...';
+  tabBlockProducer.appendChild(goToProdPanel);
   try {
     const userId = await getUserId(email);
     goToProdPanel.textContent = 'Producer panel';
+    goToProdPanel.classList.remove('loading_link');
     goToProdPanel.href =
       'https://panel.sexflix.com/producer/manage/update?id=' + userId;
     goToProdPanel.target = '_blank';
   } catch (error) {
+    console.log(error);
     goToProdPanel.textContent = 'Producer email not found in panel';
-    goToProdPanel.className = 'block_cursor';
-  } finally {
-    tabBlockProducer.appendChild(goToProdPanel);
   }
 };
 
@@ -96,6 +97,8 @@ if (emailElement) {
   const producerEmail = document.createElement('span');
   producerEmail.className = 'tab_producer_email';
   producerEmail.textContent = formatEmail;
+
+  tabBlockProducer.appendChild(producerEmail);
   fetchAndCreateLink(formatEmail);
   copyProducerEmail(producerEmail);
 

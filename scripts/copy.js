@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     copiedMessage.textContent = 'Copied';
     copiedMessage.classList.add('copied_message');
     paragraph.insertAdjacentElement('afterend', copiedMessage);
+
     paragraph.addEventListener('click', () => {
       copyTextToClipboard(paragraph.textContent);
+
       document
         .querySelectorAll('.copied_message')
         .forEach((msg) => msg.classList.remove('show'));
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(() => {
         copiedMessage.classList.remove('show');
-      }, 1500);
+      }, 500);
     });
   });
 });

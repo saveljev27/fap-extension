@@ -57,7 +57,7 @@ const urls = [
   },
 ];
 
-async function fetchPageData(url, elementId) {
+const fetchPageData = async (url, elementId) => {
   const loadingIcon = document.getElementById(`${elementId}_loading`);
   const textElement = document.getElementById(`${elementId}_text`);
   const linkElement = document.getElementById(`${elementId}_link`);
@@ -98,11 +98,11 @@ async function fetchPageData(url, elementId) {
       loadingIcon.style.display = 'none';
     }
   }
-}
+};
 
-async function fetchAllData() {
+const fetchAllData = async () => {
   const promises = urls.map((item) => fetchPageData(item.url, item.elementId));
   await Promise.all(promises);
-}
+};
 
 fetchAllData();

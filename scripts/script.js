@@ -13,16 +13,23 @@ const handleButtonClick = async (type, path) => {
   });
 };
 
-const button = document.getElementById('decline_reasons');
-if (button) {
-  button.addEventListener('click', () => {
-    handleButtonClick('open_side_panel', 'html/sidepanel.html');
+const swfBtn = document.getElementById('decline_swf');
+if (swfBtn) {
+  swfBtn.addEventListener('click', () => {
+    handleButtonClick('open_swf_panel', 'html/swfpanel.html');
   });
 }
 
-const button2 = document.getElementById('decline_reasons2');
-if (button2) {
-  button2.addEventListener('click', () => {
-    handleButtonClick('open_side_panel2', 'html/sidepanel2.html');
+const photoBtn = document.getElementById('decline_photo');
+if (photoBtn) {
+  photoBtn.addEventListener('click', () => {
+    handleButtonClick('open_photo_panel', 'html/photopanel.html');
+  });
+}
+
+const performerBtn = document.getElementById('decline_performer');
+if (performerBtn) {
+  performerBtn.addEventListener('click', () => {
+    handleButtonClick('open_performer_panel', 'html/performerpanel.html');
   });
 }

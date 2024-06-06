@@ -1,15 +1,20 @@
 // Sidebar
 chrome.runtime.onMessage.addListener(async (message, sender) => {
   if (
-    message.type === 'open_side_panel' ||
-    message.type === 'open_side_panel2'
+    message.type === 'open_swf_panel' ||
+    message.type === 'open_photo_panel' ||
+    message.type === 'open_performer_panel'
   ) {
     if (sender.tab) {
       const tabId = sender.tab.id;
-      const panelPath =
-        message.type === 'open_side_panel'
-          ? 'html/sidepanel.html'
-          : 'html/sidepanel2.html';
+      let panelPath;
+      if (message.type === 'open_swf_panel') {
+        panelPath = 'html/swfpanel.html';
+      } else if (message.type === 'open_photo_panel') {
+        panelPath = 'html/photopanel.html';
+      } else if (message.type === 'open_performer_panel') {
+        panelPath = 'html/performerpanel.html';
+      }
       await chrome.sidePanel.open({ tabId });
       await chrome.sidePanel.setOptions({
         tabId,
@@ -38,6 +43,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 // Queue request
+const fetchPageContent = async (url) => {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'text/html',
+    },
+  });
+  return response.text();
+};
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'fetchQuanity') {
     fetchPageContent(request.url)
@@ -47,12 +62,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-async function fetchPageContent(url) {
+// Fetch Email
+const fetchEmail = async (url) => {
   const response = await fetch(url, {
     method: 'GET',
     headers: {
-      'Content-Type': 'text/html',
+      'X-Requested-With': 'XMLHttpRequest',
     },
   });
-  return response.text();
-}
+  return response.json();
+};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchEmail') {
+    fetchEmail(request.url)
+      .then((data) => sendResponse({ data }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
