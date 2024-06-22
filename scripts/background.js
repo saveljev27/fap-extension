@@ -81,3 +81,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 });
+
+// Get Video Status
+const fetchVideoStatus = async (url) => {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'text/html',
+    },
+  });
+  return response.text();
+};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchVideoStatus') {
+    fetchPageContent(request.url)
+      .then((html) => sendResponse({ html }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});

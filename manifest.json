@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Faphouse Extension",
-  "description": "Reason, co-performer declines. Email and Panel tab in SP. Tickets Buttons on Prod and User page.",
-  "version": "0.2.3",
+  "description": "Reason, co-performer declines. Email and Panel tab in SP. Tickets Buttons on Prod and User page. Published Video Alert.",
+  "version": "0.2.4",
   "action": {
     "default_icon": "images/faphouse_16.png",
     "default_popup": "html/index.html"
@@ -22,19 +22,22 @@
   },
   "host_permissions": [
     "https://panel.sexflix.com/*",
-    "https://support.faphouse.com/*"
+    "https://support.faphouse.com/*",
+    "https://panel.stage.k8s.flixdev.com/*"
   ],
   "content_scripts": [
     {
       "matches": [
         "https://panel.sexflix.com/*",
-        "https://support.faphouse.com/*"
+        "https://support.faphouse.com/*",
+        "https://panel.stage.k8s.flixdev.com/*"
       ],
       "js": [
         "scripts/script.js",
         "scripts/sp.js",
         "scripts/parser.js",
-        "scripts/spToTickets.js"
+        "scripts/spToTickets.js",
+        "scripts/published.js"
       ],
       "css": ["css/styles.css"]
     }
