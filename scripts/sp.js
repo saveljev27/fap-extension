@@ -8,9 +8,7 @@ const emailFormating = (email) => {
 const copyEmailToClipboard = async (text) => {
   try {
     navigator.clipboard.writeText(text);
-  } catch (error) {
-    console.log('Failed to copy');
-  }
+  } catch (error) {}
 };
 // Copy producer email from tabBlockProducer
 const copyProducerEmail = (producerEmail) => {
@@ -60,14 +58,12 @@ const getUserId = async (email) => {
     url: url,
   });
   if (response.error) {
-    throw new Error(response.error);
+    return;
   }
   try {
     const id = response.data.results[0].id;
     return id;
-  } catch (error) {
-    throw new Error(error);
-  }
+  } catch (error) {}
 };
 
 // Using getUserId response to redirect on panel page
@@ -84,7 +80,6 @@ const fetchAndCreateLink = async (email) => {
       'https://panel.sexflix.com/producer/manage/update?id=' + userId;
     goToProdPanel.target = '_blank';
   } catch (error) {
-    console.log(error);
     goToProdPanel.textContent = 'Producer email not found in panel';
   }
 };

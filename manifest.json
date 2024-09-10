@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Faphouse Extension",
   "description": "Reason, co-performer declines. Email and Panel tab in SP. Tickets Buttons on Prod and User page. Published Video Alert.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "action": {
     "default_icon": "images/faphouse_16.png",
     "default_popup": "html/index.html"
@@ -35,9 +35,10 @@
       "js": [
         "scripts/script.js",
         "scripts/sp.js",
-        "scripts/parser.js",
+        "scripts/queue.js",
         "scripts/spToTickets.js",
-        "scripts/published.js"
+        "scripts/published.js",
+        "scripts/monetization.js"
       ],
       "css": ["css/styles.css"]
     }

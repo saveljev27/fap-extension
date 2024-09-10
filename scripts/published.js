@@ -21,9 +21,7 @@ const fetchVideoStatus = async (id) => {
 
       return { id, status };
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 const videoIdToFetch = async () => {

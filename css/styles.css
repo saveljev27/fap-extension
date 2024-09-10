@@ -12,10 +12,12 @@
 h2 {
   text-align: center;
 }
+
 .poppup {
   height: 550px;
   width: 350px;
 }
+
 .poppup_header {
   display: flex;
   background-color: var(--main-color);
@@ -178,4 +180,18 @@ h2 {
 }
 .btn_margin_right {
   margin-right: 4px;
+}
+.label-warning {
+  background-color: #000;
+}
+
+/* Monetization */
+.comment-popup {
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  padding: 5px 10px;
+  color: red;
+  display: none;
+  border: 1px solid black;
 }
