@@ -13,34 +13,34 @@ const fetchData = async (url, action) => {
   } catch (error) {}
 };
 
-const videoIdBlocks = Array.from(document.querySelectorAll('.col-md-1')).filter(
-  (block) => {
+const videoIdBlocks = Array.from(document.querySelectorAll('.col-md-1'))
+  .filter((block) => {
     return getHref(block) !== null;
-  }
-);
+  })
+  .slice(0, 5);
 
-const qualityBlocks = Array.from(document.querySelectorAll('.col-md-2')).filter(
-  (block) => {
+const qualityBlocks = Array.from(document.querySelectorAll('.col-md-2'))
+  .filter((block) => {
     return block.textContent.includes('quality');
-  }
-);
+  })
+  .slice(0, 5);
 
 // To show producer only once
 const uniqueProducerHrefs = new Set();
-const producerBlocks = Array.from(
-  document.querySelectorAll('.col-md-2')
-).filter((block) => {
-  const href = getHref(block);
-  if (
-    href &&
-    block.textContent.includes('producer') &&
-    !uniqueProducerHrefs.has(href)
-  ) {
-    uniqueProducerHrefs.add(href);
-    return true;
-  }
-  return false;
-});
+const producerBlocks = Array.from(document.querySelectorAll('.col-md-2'))
+  .filter((block) => {
+    const href = getHref(block);
+    if (
+      href &&
+      block.textContent.includes('producer') &&
+      !uniqueProducerHrefs.has(href)
+    ) {
+      uniqueProducerHrefs.add(href);
+      return true;
+    }
+    return false;
+  })
+  .slice(0, 5);
 
 const fetchMonetizationStatuses = async () => {
   const promises = videoIdBlocks.map(async (block) => {
