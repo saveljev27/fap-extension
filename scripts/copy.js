@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   function copyTextToClipboard(text) {
-    navigator.clipboard.writeText(text).catch(function (error) {
-      console.log('Copy error:', error);
-    });
+    navigator.clipboard.writeText(text).catch(function (error) {});
   }
 
   const paragraphs = document.querySelectorAll('.reason_text');

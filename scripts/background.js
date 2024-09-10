@@ -1,3 +1,10 @@
+const fetchParams = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'text/html',
+  },
+};
+
 // Sidebar
 chrome.runtime.onMessage.addListener(async (message, sender) => {
   if (
@@ -42,26 +49,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-// Queue request
-const fetchPageContent = async (url) => {
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'text/html',
-    },
-  });
-  return response.text();
-};
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'fetchQuanity') {
-    fetchPageContent(request.url)
-      .then((html) => sendResponse({ html }))
-      .catch((error) => sendResponse({ error: error.toString() }));
-    return true;
-  }
-});
-
 // Fetch Email
 const fetchEmail = async (url) => {
   const response = await fetch(url, {
@@ -82,20 +69,60 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+// Queue request
+const fetchPageContent = async (url) => {
+  const response = await fetch(url, fetchParams);
+  return response.text();
+};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchQuanity') {
+    fetchPageContent(request.url)
+      .then((html) => sendResponse({ html }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
+
+// Monetization status
+const fetchMonetizationStatus = async (url) => {
+  const response = await fetch(url, fetchParams);
+  return response.text();
+};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchMonetizationStatus') {
+    fetchMonetizationStatus(request.url)
+      .then((html) => sendResponse({ html }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
+
+// Producer comments
+const fetchProducerComments = async (url) => {
+  const response = await fetch(url, fetchParams);
+  return response.text();
+};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchProducerComments') {
+    fetchProducerComments(request.url)
+      .then((html) => sendResponse({ html }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
+
 // Get Video Status
 const fetchVideoStatus = async (url) => {
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'text/html',
-    },
-  });
+  const response = await fetch(url, fetchParams);
   return response.text();
 };
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'fetchVideoStatus') {
-    fetchPageContent(request.url)
+    fetchVideoStatus(request.url)
       .then((html) => sendResponse({ html }))
       .catch((error) => sendResponse({ error: error.toString() }));
     return true;

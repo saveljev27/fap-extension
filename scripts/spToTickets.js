@@ -23,14 +23,12 @@ const fetchEmail = async (dataId, type) => {
     url: url,
   });
   if (response.error) {
-    throw new Error(response.error);
+    return;
   }
   try {
     const email = response.data.email;
     return email;
-  } catch (error) {
-    throw new Error('Bad request');
-  }
+  } catch (error) {}
 };
 
 const fetchDataInSp = async (email) => {
@@ -42,14 +40,12 @@ const fetchDataInSp = async (email) => {
     url: url,
   });
   if (!response) {
-    throw new Error(response.error);
+    return;
   }
   try {
     const data = response.data.aaData;
     return data;
-  } catch (error) {
-    throw new Error(error);
-  }
+  } catch (error) {}
 };
 
 const responseAndHandle = async () => {
