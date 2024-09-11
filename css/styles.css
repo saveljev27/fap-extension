@@ -8,13 +8,14 @@
   text-decoration: none;
   border: 0;
 }
+
 /* Poppup */
 h2 {
   text-align: center;
 }
 
 .poppup {
-  height: 550px;
+  height: 565px;
   width: 350px;
 }
 
@@ -26,6 +27,7 @@ h2 {
   align-items: center;
   justify-content: center;
 }
+
 /* Shadow */
 .poppup_header,
 .link,
@@ -41,8 +43,9 @@ h2 {
   gap: 5px;
   width: 100%;
   height: 50px;
-  margin-top: 10px;
+  margin-top: 3px;
 }
+
 .link {
   font-size: 16px;
   background-color: var(--main-color);
@@ -51,17 +54,20 @@ h2 {
   padding: 3px 6px;
   transition: transform 0.3s ease-in-out;
 }
+
 .link:hover {
   opacity: 80%;
   cursor: pointer;
   transform: scale(1.02);
 }
+
 .interactive {
   margin-top: 15px;
   display: flex;
   justify-content: center;
   gap: 10px;
 }
+
 .interactive_button {
   padding: var(--button-padding);
   font-size: 16px;
@@ -70,11 +76,13 @@ h2 {
   border-radius: 5px;
   transition: transform 0.3s ease-in-out;
 }
+
 .interactive_button:hover {
   cursor: pointer;
   opacity: 80%;
   transform: scale(1.02);
 }
+
 /* Poppup Queue */
 .queue_field {
   display: flex;
@@ -83,22 +91,54 @@ h2 {
   margin-top: 5px;
   font-size: 14px;
 }
+
 .queue_link {
   color: var(--main-color);
   font-family: inherit;
 }
+
+.queue_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.queue_text,
+.queue_title {
+  padding: 5px;
+  border: 1px solid black;
+  text-align: center; /* Выровнять текст по правому краю */
+  background-color: #f2f2f2;
+}
+
+.queue_title {
+  text-align: left;
+  font-size: 12px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .loading_icon {
   height: 10px;
   width: 10px;
 }
+
 .main {
   font-weight: bold;
+  font-size: 12px;
 }
+
 .secondary {
-  margin-left: 10px;
+  margin-left: 0;
+  font-size: 12px;
 }
+
 .queue_link:hover,
-.tab_producer_email:hover {
+.tab_producer_email:hover,
+.refresh:hover {
   opacity: 80%;
   cursor: pointer;
 }
@@ -111,9 +151,11 @@ h2 {
   align-items: center;
   border-bottom: 1px solid var(--main-color);
 }
+
 .sidepanel_title {
   font-size: 20px;
 }
+
 .reason_title,
 .sidepanel_toggle_btn {
   color: var(--secondary-color);
@@ -125,6 +167,7 @@ h2 {
   font-size: 16px;
   font-family: inherit;
 }
+
 .sidepanel_toggle_btn {
   align-content: center;
 }
@@ -133,12 +176,14 @@ h2 {
 .reason_title:hover {
   transform: scale(1.02);
 }
+
 .reason_text {
   font-size: 16px;
   display: none;
   padding: var(--button-padding);
   border-bottom: 1px solid var(--main-color);
 }
+
 .reason_text:hover,
 .reason_title:hover,
 .sidepanel_toggle_btn:hover {
@@ -152,11 +197,13 @@ h2 {
   display: none;
   margin-left: 10px;
 }
+
 .copied_message {
   background: var(--main-color);
   padding: 2px 4px;
   color: var(--secondary-color);
 }
+
 .copied_message.show {
   display: inline;
 }
@@ -166,21 +213,26 @@ h2 {
   pointer-events: none;
   color: gray;
 }
+
 .tab_producer {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
   gap: 10px;
 }
+
 .tab_producer_email {
   display: flex;
 }
+
 .btn_margin_left {
   margin-left: 4px;
 }
+
 .btn_margin_right {
   margin-right: 4px;
 }
+
 .label-warning {
   background-color: #000;
 }

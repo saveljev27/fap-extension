@@ -41,101 +41,345 @@
           >SP</a
         >
       </nav>
+
       <div class="queue">
-        <a class="queue_link" id="video_link">
-          <div class="queue_field" id="video">
-            <span id="queue_title" class="main">Video: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="video_loading"
-              />
-              <span class="main" id="video_text"></span>
-            </div>
-          </div>
-        </a>
-        <a class="queue_link" id="videoindividuals_link">
-          <div class="queue_field" id="videoindividuals">
-            <span id="queue_title" class="secondary">Individuals: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="videoindividuals_loading"
-              />
-              <span class="main" id="videoindividuals_text"></span>
-            </div>
-          </div>
-        </a>
-        <a class="queue_link" id="videobusiness_link">
-          <div class="queue_field" id="videobusiness">
-            <span id="queue_title" class="secondary">Business: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="videobusiness_loading"
-              />
-              <span class="main" id="videobusiness_text"></span>
-            </div>
-          </div>
-        </a>
-        <a class="queue_link" id="xhamster_link">
-          <div class="queue_field" id="xhamster">
-            <span id="queue_title" class="secondary">Xhamster: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="xhamster_loading"
-              />
-              <span class="main" id="xhamster_text"></span>
-            </div>
-          </div>
-        </a>
-        <a class="queue_link" id="xvideos_link">
-          <div class="queue_field" id="xvideos">
-            <span id="transfers_title" class="secondary">Xvideos: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="xvideos_loading"
-              />
-              <span class="main" id="xvideos_text"></span>
-            </div>
-          </div>
-        </a>
-        <a class="queue_link" id="pornhub_link">
-          <div class="queue_field" id="pornhub">
-            <span id="transfers_title" class="secondary">Pornhub: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="pornhub_loading"
-              />
-              <span class="main" id="pornhub_text"></span>
-            </div>
-          </div>
-        </a>
-        <a class="queue_link" id="onlyfans_link">
-          <div class="queue_field" id="onlyfans">
-            <span id="transfers_title" class="secondary">Onlyfans: </span>
-            <div class="quantity">
-              <img
-                src="/images/loading.gif"
-                class="loading_icon"
-                id="onlyfans_loading"
-              />
-              <span class="main" id="onlyfans_text"></span>
-            </div>
-          </div>
-        </a>
+        <table class="queue_table">
+          <thead>
+            <tr>
+              <th class="queue_text queue_title">Type:</th>
+              <th class="queue_text">New</th>
+              <th class="queue_text">Update</th>
+              <th class="queue_text">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="queue_text queue_title">Video:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="videonew_link" target="_blank">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videonew_loading"
+                    />
+                    <span class="main" id="videonew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="videoupdate_link" target="_blank">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videoupdate_loading"
+                    />
+                    <span class="main" id="videoupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="video_link" target="_blank">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="video_loading"
+                    />
+                    <span class="main" id="video_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Individuals:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="videoindividualsnew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videoindividualsnew_loading"
+                    />
+                    <span class="main" id="videoindividualsnew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="videoindividualsupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videoindividualsupdate_loading"
+                    />
+                    <span class="main" id="videoindividualsupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="videoindividuals_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videoindividuals_loading"
+                    />
+                    <span class="main" id="videoindividuals_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Business:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="videobusinessnew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videobusinessnew_loading"
+                    />
+                    <span class="main" id="videobusinessnew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="videobusinessupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videobusinessupdate_loading"
+                    />
+                    <span class="main" id="videobusinessupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="videobusiness_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="videobusiness_loading"
+                    />
+                    <span class="main" id="videobusiness_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Faphouse:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="faphousenew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="faphousenew_loading"
+                    />
+                    <span class="main" id="faphousenew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="faphouseupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="faphouseupdate_loading"
+                    />
+                    <span class="main" id="faphouseupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="faphouse_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="faphouse_loading"
+                    />
+                    <span class="main" id="faphouse_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Xhamster:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="xhamsternew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="xhamsternew_loading"
+                    />
+                    <span class="main" id="xhamsternew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="xhamsterupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="xhamsterupdate_loading"
+                    />
+                    <span class="main" id="xhamsterupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="xhamster_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="xhamster_loading"
+                    />
+                    <span class="main" id="xhamster_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Xvideos:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="xvideosnew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="xvideosnew_loading"
+                    />
+                    <span class="main" id="xvideosnew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="xvideosupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="xvideosupdate_loading"
+                    />
+                    <span class="main" id="xvideosupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="xvideos_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="xvideos_loading"
+                    />
+                    <span class="main" id="xvideos_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Pornhub:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="pornhubnew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="pornhubnew_loading"
+                    />
+                    <span class="main" id="pornhubnew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="pornhubupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="pornhubupdate_loading"
+                    />
+                    <span class="main" id="pornhubupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="pornhub_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="pornhub_loading"
+                    />
+                    <span class="main" id="pornhub_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="queue_text queue_title">Onlyfans:</td>
+              <td class="queue_text">
+                <a class="queue_link" id="onlyfansnew_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="onlyfansnew_loading"
+                    />
+                    <span class="main" id="onlyfansnew_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="onlyfansupdate_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="onlyfansupdate_loading"
+                    />
+                    <span class="main" id="onlyfansupdate_text"></span>
+                  </div>
+                </a>
+              </td>
+              <td class="queue_text">
+                <a class="queue_link" id="onlyfans_link">
+                  <div class="quantity">
+                    <img
+                      src="/images/loading.gif"
+                      class="loading_icon"
+                      id="onlyfans_loading"
+                    />
+                    <span class="main" id="onlyfans_text"></span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
         <a class="queue_link" id="transfersphoto_link">
           <div class="queue_field" id="transfersphoto">
-            <span class="main" id="transfers_title">Transferred photo: </span>
+            <span class="secondary" id="transfers_title"
+              >Transferred photo:
+            </span>
             <div class="quantity">
               <img
                 src="/images/loading.gif"
@@ -148,7 +392,7 @@
         </a>
         <a class="queue_link" id="studio_link">
           <div class="queue_field" id="studio">
-            <span class="main" id="transfers_title">Studio: </span>
+            <span class="secondary" id="transfers_title">Studio: </span>
             <div class="quantity">
               <img
                 src="/images/loading.gif"
@@ -161,7 +405,7 @@
         </a>
         <a class="queue_link" id="sfw_link">
           <div class="queue_field" id="sfw">
-            <span class="main" id="transfers_title">SFW: </span>
+            <span class="secondary" id="transfers_title">SFW: </span>
             <div class="quantity">
               <img
                 src="/images/loading.gif"
@@ -174,7 +418,7 @@
         </a>
         <a class="queue_link" id="producer_link">
           <div class="queue_field" id="producer">
-            <span class="main" id="transfers_title">Producer: </span>
+            <span class="secondary" id="transfers_title">Producer: </span>
             <div class="quantity">
               <img
                 src="/images/loading.gif"
@@ -187,7 +431,7 @@
         </a>
         <a class="queue_link" id="performer_link">
           <div class="queue_field" id="performer">
-            <span class="main" id="transfers_title">Performer: </span>
+            <span class="secondary" id="transfers_title">Performer: </span>
             <div class="quantity">
               <img
                 src="/images/loading.gif"
@@ -200,7 +444,7 @@
         </a>
         <a class="queue_link" id="avatars_link">
           <div class="queue_field" id="avatars">
-            <span class="main" id="transfers_title">Avatars: </span>
+            <span class="secondary" id="transfers_title">Avatars: </span>
             <div class="quantity">
               <img
                 src="/images/loading.gif"
