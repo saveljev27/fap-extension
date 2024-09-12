@@ -38,7 +38,8 @@
         "scripts/queue.js",
         "scripts/spToTickets.js",
         "scripts/published.js",
-        "scripts/monetization.js"
+        "scripts/monetization.js",
+        "scripts/review.js"
       ],
       "css": ["css/styles.css"]
     }

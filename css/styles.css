@@ -10,13 +10,14 @@
 }
 
 /* Poppup */
-h2 {
-  text-align: center;
-}
 
 .poppup {
   height: 565px;
   width: 350px;
+}
+
+.poppup_title {
+  text-align: center;
 }
 
 .poppup_header {
@@ -92,6 +93,10 @@ h2 {
   font-size: 14px;
 }
 
+.queue_head {
+  background-color: #f2f2f2;
+}
+
 .queue_link {
   color: var(--main-color);
   font-family: inherit;
@@ -107,7 +112,6 @@ h2 {
   padding: 5px;
   border: 1px solid black;
   text-align: center; /* Выровнять текст по правому краю */
-  background-color: #f2f2f2;
 }
 
 .queue_title {
