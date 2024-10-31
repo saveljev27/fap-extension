@@ -12,7 +12,7 @@
 /* Poppup */
 
 .poppup {
-  height: 565px;
+  height: 540px;
   width: 350px;
 }
 
@@ -125,6 +125,10 @@
   justify-content: center;
 }
 
+.separator {
+  border-bottom: 2px solid black;
+}
+
 .loading_icon {
   height: 10px;
   width: 10px;
@@ -135,8 +139,12 @@
   font-size: 12px;
 }
 
+.main_bold {
+  font-weight: bold;
+}
+
 .secondary {
-  margin-left: 0;
+  margin-left: 10px;
   font-size: 12px;
 }
 
@@ -216,6 +224,7 @@
 .loading_link {
   pointer-events: none;
   color: gray;
+  padding: 4px 12px;
 }
 
 .tab_producer {
@@ -223,10 +232,25 @@
   flex-direction: column;
   margin-top: 30px;
   gap: 10px;
+  align-items: flex-start;
+  font-size: 16px;
+}
+.sp_status {
+  background: #102027;
+  color: #fff;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  font-weight: 700;
+  border-width: 0;
+}
+
+.tab_producer a {
+  display: inline;
+  white-space: nowrap;
 }
 
 .tab_producer_email {
-  display: flex;
+  display: inline;
 }
 
 .btn_margin_left {
@@ -242,12 +266,19 @@
 }
 
 /* Monetization */
-.comment-popup {
+.comment_popup {
   position: absolute;
   z-index: 1;
   background-color: #fff;
   padding: 5px 10px;
   color: red;
   display: none;
-  border: 1px solid black;
+  border: 1px solid #333333;
+  margin-top: 5px;
+}
+
+.multiple_comment {
+  margin-top: 20px;
+  display: block;
+  max-width: auto;
 }

@@ -1,4 +1,5 @@
 const getHref = (block) => {
+  if (!block) return;
   const linkElement = block.querySelector('a');
   return linkElement ? linkElement.getAttribute('href') : null;
 };
@@ -49,17 +50,16 @@ const fetchMonetizationStatuses = async () => {
       const url = 'https://panel.sexflix.com' + href;
       const doc = await fetchData(url, 'fetchMonetizationStatus');
       if (doc) {
-        const monetizationValue = doc.getElementById(
-          'videoupdateform-accesstype'
-        ).value;
+        const monetizationValue =
+          doc.getElementById('videoupdateform-accesstype').value || null;
         const checker = doc.querySelector('.field-videoupdateform-vodallowed');
         const checkbox = checker.querySelector(
           'input[type="checkbox"]'
         ).checked;
-        const vod = checkbox ? 'vod + ' : '';
+        const vod = checkbox ? ' + VOD' : '';
 
         return monetizationValue
-          ? vod + monetizationValue || monetizationValue
+          ? monetizationValue + vod || monetizationValue
           : 'N/A';
       }
     }
@@ -114,7 +114,7 @@ const showInternalComments = async () => {
       producer.style.color = 'red';
 
       const comment = document.createElement('b');
-      comment.classList.add('comment-popup');
+      comment.classList.add('comment_popup');
 
       comment.textContent = `${internalComment[index]}` || 'N/A';
 

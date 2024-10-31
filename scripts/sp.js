@@ -1,15 +1,89 @@
+const ticketUrl = document.URL;
+const spUrl = ticketUrl.includes('https://support.faphouse.com/');
+const emailElement = document.querySelector('.sp-reply-all-recipients');
+const getSubmititedTitle = document.querySelector('.sp-title-description');
+
+const tabBlockProducer = document.createElement('div');
+tabBlockProducer.id = 'tabProducer';
+tabBlockProducer.className = 'tab_producer';
+
+const getTicketsId = () => {
+  const getHref = getSubmititedTitle.querySelector('a');
+  const url = getHref.getAttribute('href');
+  const onlyDigits = url.match(/\d+/g);
+  return onlyDigits[0];
+};
+
+// Find ul element and create one more li and a element
+const findBlockElement = document.querySelector('.sp-content-inner');
+if (findBlockElement) {
+  const menu = document.getElementById('Followup');
+  findBlockElement.appendChild(tabBlockProducer);
+  if (menu) {
+    const producer = document.createElement('li');
+    producer.id = 'Producer';
+    const copyArc = document.createElement('a');
+    copyArc.textContent = 'Email and Panel';
+
+    const tickets = document.createElement('li');
+    tickets.id = 'Tickets';
+    const ticketsLink = document.createElement('a');
+    ticketsLink.textContent = 'All User Tickets';
+    ticketsLink.href = `https://support.faphouse.com/en/staff/user/manage/${getTicketsId()}/ticket`;
+    ticketsLink.target = '_blank';
+
+    producer.insertAdjacentElement('beforeend', copyArc);
+    tickets.insertAdjacentElement('beforeend', ticketsLink);
+    menu.insertAdjacentElement('afterend', tickets);
+    menu.insertAdjacentElement('afterend', producer);
+  }
+}
+
 // Format email function
 const emailFormating = (email) => {
-  const emailRedex = /[\w.-]+@[\w.-]+\.\w+/;
-  const match = email.match(emailRedex);
+  const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
+  const match = email.match(emailRegex);
   return match ? match[0] : 'Email not found';
 };
+
+// For Producer and User account status
+const createStatusLink = (doc, inputName, label, url) => {
+  const statusInput = doc.querySelector(`input[name="${inputName}"]`);
+  const statusElement = document.createElement('a');
+  const statusSpan = document.createElement('span');
+  statusElement.classList.add('sp-button', 'sp-button-sm');
+  const statusValue = statusInput.value.toLowerCase();
+  const labelText = document.createTextNode(`${label} status: `);
+  statusSpan.textContent = statusValue ? statusValue : 'N/A';
+  if (statusValue === 'banned') {
+    statusSpan.style.color = 'red';
+  } else {
+    statusSpan.style.color = 'green';
+  }
+  statusElement.href = url;
+  statusElement.target = '_blank';
+  statusElement.appendChild(labelText);
+  statusElement.appendChild(statusSpan);
+  tabBlockProducer.appendChild(statusElement);
+};
+
+// Functionality For Producer and User account panel
+const createPanelLink = (label, url) => {
+  const panelElement = document.createElement('a');
+  panelElement.textContent = label + ' panel';
+  panelElement.href = url;
+  panelElement.target = '_blank';
+  panelElement.classList.add('sp-button', 'sp-button-sm');
+  tabBlockProducer.appendChild(panelElement);
+};
+
 // Copy email to clipboard functionality
 const copyEmailToClipboard = async (text) => {
   try {
     navigator.clipboard.writeText(text);
   } catch (error) {}
 };
+
 // Copy producer email from tabBlockProducer
 const copyProducerEmail = (producerEmail) => {
   const copiedMessage = document.createElement('span');
@@ -29,27 +103,6 @@ const copyProducerEmail = (producerEmail) => {
   });
 };
 
-// Create tabBlockProducer
-const tabBlockProducer = document.createElement('div');
-tabBlockProducer.id = 'tabProducer';
-tabBlockProducer.className = 'tab_producer';
-
-// Find ul element and create one more li and a element
-const findBlockElement = document.querySelector('.sp-content-inner');
-if (findBlockElement) {
-  const menu = document.getElementById('Followup');
-  findBlockElement.appendChild(tabBlockProducer);
-  if (menu) {
-    const producer = document.createElement('li');
-    producer.id = 'Producer';
-    const copyArc = document.createElement('a');
-    copyArc.textContent = 'Email and Panel';
-
-    producer.insertAdjacentElement('beforeend', copyArc);
-    menu.insertAdjacentElement('afterend', producer);
-  }
-}
-
 const getUserId = async (email) => {
   const url =
     'https://panel.sexflix.com/producer/search/for-select2?q=' + email;
@@ -66,42 +119,66 @@ const getUserId = async (email) => {
   } catch (error) {}
 };
 
-// Using getUserId response to redirect on panel page
-const fetchAndCreateLink = async (email) => {
-  const goToProdPanel = document.createElement('a');
-  goToProdPanel.className = 'loading_link';
-  goToProdPanel.textContent = 'Loading...';
-  tabBlockProducer.appendChild(goToProdPanel);
-  try {
-    const userId = await getUserId(email);
-    goToProdPanel.textContent = 'Producer panel';
-    goToProdPanel.classList.remove('loading_link');
-    goToProdPanel.href =
-      'https://panel.sexflix.com/producer/manage/update?id=' + userId;
-    goToProdPanel.target = '_blank';
-  } catch (error) {
-    goToProdPanel.textContent = 'Producer email not found in panel';
-  }
+const getUserEmail = () => {
+  if (!emailElement) return;
+  const email = emailFormating(emailElement.textContent);
+  return email;
 };
 
-// Email search, formating. User Panel creating
-const emailElement = document.querySelector('.sp-reply-all-recipients');
-if (emailElement) {
-  const findEmail = emailElement ? emailElement.textContent : '';
-  const formatEmail = emailFormating(findEmail);
-  const producerEmail = document.createElement('span');
-  producerEmail.className = 'tab_producer_email';
-  producerEmail.textContent = formatEmail;
+const fetchAndShowProducerStatus = async (id, userUrl) => {
+  const url = 'https://panel.sexflix.com/producer/manage/update?id=' + id;
+  try {
+    const response = await chrome.runtime.sendMessage({
+      action: 'fetchProducerStatus',
+      url: url,
+    });
+    if (response?.html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(response.html, 'text/html');
+      if (doc) {
+        createPanelLink('Producer', url);
+        createStatusLink(doc, 'User status', 'User', userUrl);
+        createStatusLink(doc, 'status', 'Producer', url);
+      }
+    }
+  } catch (error) {}
+};
 
-  tabBlockProducer.appendChild(producerEmail);
-  fetchAndCreateLink(formatEmail);
+const showProducerEmail = (email) => {
+  const producerEmail = document.createElement('a');
+  producerEmail.classList.add(
+    'tab_producer_email',
+    'sp-button',
+    'sp-button-sm'
+  );
+  producerEmail.textContent = email;
   copyProducerEmail(producerEmail);
+  tabBlockProducer.appendChild(producerEmail);
+};
 
-  const goToUserPanel = document.createElement('a');
-  goToUserPanel.textContent = 'User panel';
-  goToUserPanel.href =
+const producerEmailAndPanelFunctionality = async () => {
+  const userUrl =
     'https://panel.sexflix.com/user/manage/index?uid=&xUserId=&email=' +
-    formatEmail;
-  goToUserPanel.target = '_blank';
-  tabBlockProducer.appendChild(goToUserPanel);
+    getUserEmail();
+  const loading = document.createElement('a');
+  loading.textContent = 'Loading...';
+  loading.className = 'loading_link';
+
+  showProducerEmail(getUserEmail());
+  createPanelLink('User', userUrl);
+  tabBlockProducer.appendChild(loading);
+
+  try {
+    const id = await getUserId(getUserEmail());
+    if (id) {
+      await Promise.all([fetchAndShowProducerStatus(id, userUrl)]);
+      loading.remove();
+    } else {
+      loading.textContent = 'Producer email and status not found in panel.';
+    }
+  } catch (error) {}
+};
+
+if (spUrl && emailElement) {
+  producerEmailAndPanelFunctionality();
 }

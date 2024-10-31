@@ -1,3 +1,11 @@
+const editingProducerPanel = document.URL;
+const editingProducerUrl = editingProducerPanel.includes(
+  'https://panel.sexflix.com/producer/manage'
+);
+const editingUserPanel = editingProducerPanel.includes(
+  'https://panel.sexflix.com/user/manage'
+);
+
 const createButton = (text, className) => {
   const button = document.createElement('a');
   button.innerText = text;
@@ -81,7 +89,6 @@ const responseAndHandle = async () => {
 
   const fpBtn = createButton('Loading...', btnClass);
   parentElement.insertBefore(fpBtn, mainBtn.nextSibling);
-
   try {
     const email = await fetchEmail(dataId, type);
     const spData = await fetchDataInSp(email);
@@ -98,4 +105,6 @@ const responseAndHandle = async () => {
   }
 };
 
-responseAndHandle();
+if (editingProducerPanel || editingUserPanel) {
+  responseAndHandle();
+}

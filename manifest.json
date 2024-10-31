@@ -39,7 +39,9 @@
         "scripts/spToTickets.js",
         "scripts/published.js",
         "scripts/monetization.js",
-        "scripts/review.js"
+        "scripts/review.js",
+        "scripts/photo.js",
+        "scripts/multipleModeration.js"
       ],
       "css": ["css/styles.css"]
     }

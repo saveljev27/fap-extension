@@ -4,96 +4,40 @@ const urls = [
     elementId: 'video',
   },
   {
-    url: 'https://panel.sexflix.com/video/moderation/index?requestType=1',
-    elementId: 'videonew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?requestType=2',
-    elementId: 'videoupdate',
-  },
-  {
     url: 'https://panel.sexflix.com/video/moderation/index?producerType=1',
     elementId: 'videoindividuals',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?requestType=1&producerType=1',
-    elementId: 'videoindividualsnew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?requestType=2&producerType=1',
-    elementId: 'videoindividualsupdate',
   },
   {
     url: 'https://panel.sexflix.com/video/moderation/index?producerType=2',
     elementId: 'videobusiness',
   },
   {
-    url: 'https://panel.sexflix.com/video/moderation/index?requestType=1&producerType=2',
-    elementId: 'videobusinessnew',
+    url: 'https://panel.sexflix.com/video/stop-words-moderation/',
+    elementId: 'stopwords',
   },
   {
-    url: 'https://panel.sexflix.com/video/moderation/index?requestType=2&producerType=2',
-    elementId: 'videobusinessupdate',
+    url: 'https://panel.sexflix.com/vr/moderation/video',
+    elementId: 'vr',
   },
   {
     url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=faphouse',
     elementId: 'faphouse',
   },
   {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=faphouse&requestType=1',
-    elementId: 'faphousenew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=faphouse&requestType=2',
-    elementId: 'faphouseupdate',
-  },
-  {
     url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=xhamster',
     elementId: 'xhamster',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?transferSource=xhamster&requestType=1',
-    elementId: 'xhamsternew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=xhamster&requestType=2',
-    elementId: 'xhamsterupdate',
   },
   {
     url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=xvideos',
     elementId: 'xvideos',
   },
   {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=xvideos&requestType=1',
-    elementId: 'xvideosnew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=xvideos&requestType=2',
-    elementId: 'xvideosupdate',
-  },
-  {
     url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=pornhub',
     elementId: 'pornhub',
   },
   {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=pornhub&requestType=1',
-    elementId: 'pornhubnew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=pornhub&requestType=2',
-    elementId: 'pornhubupdate',
-  },
-  {
     url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=onlyfans',
     elementId: 'onlyfans',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=onlyfans&requestType=1',
-    elementId: 'onlyfansnew',
-  },
-  {
-    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=onlyfans&requestType=2',
-    elementId: 'onlyfansupdate',
   },
   {
     url: 'https://panel.sexflix.com/transferredcontent/moderation/photo',

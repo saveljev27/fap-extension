@@ -99,6 +99,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+// Producer status
+const fetchProducerStatus = async (url) => {
+  const response = await fetch(url, fetchParams);
+  return response.text();
+};
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'fetchProducerStatus') {
+    fetchProducerStatus(request.url)
+      .then((html) => sendResponse({ html }))
+      .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
+
 // Producer comments
 const fetchProducerComments = async (url) => {
   const response = await fetch(url, fetchParams);

@@ -1,3 +1,8 @@
+const publishedModeration = document.URL;
+const publishedMultiple = publishedModeration.includes(
+  'https://panel.sexflix.com/video/multiple-moderation'
+);
+
 const fetchVideoStatus = async (id) => {
   const url = 'https://panel.sexflix.com/video/manage/update?id=' + id;
   try {
@@ -36,7 +41,7 @@ const videoIdToFetch = async () => {
   const response = await Promise.all(getStatus);
 
   const published = response
-    .filter((pub) => pub.status === 'published')
+    .filter((pub) => pub && pub.status === 'published')
     .map((video) => {
       const findVid = Array.from(tables).find(
         (tab) => tab.getAttribute('data-video-id') === video.id
@@ -57,4 +62,6 @@ const videoIdToFetch = async () => {
   return published;
 };
 
-videoIdToFetch();
+if (publishedMultiple) {
+  videoIdToFetch();
+}
