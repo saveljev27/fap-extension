@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Faphouse Extension",
-  "description": "Reason, co-performer declines. Email and Panel tab in SP. Tickets Buttons on Prod and User page. Published Video Alert. Monetization status and Internal Comments.",
+  "description": "Reason, co-performer declines. Email and Producer Panel and Statuses on tab in SP. Tickets Buttons on Prod and User page. Published Video Alert. Monetization status and Internal Comments. Producer Comment in Photo moderation. Producer Comment and Short Video Validation in Multiple Moderation.",
   "version": "0.2.5",
   "action": {
     "default_icon": "images/faphouse_16.png",
