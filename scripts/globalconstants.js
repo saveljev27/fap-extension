@@ -13,6 +13,11 @@ window.moderationURL = page.includes(`${url}/video/multiple-moderation`);
 // VR moderation
 window.vrmoderationURL = page.includes(`${url}/vr/moderation/video`);
 
+// Stop Words Moderation
+window.stopwordsModerationURL = page.includes(
+  `${url}/video/stop-words-moderation`
+);
+
 // Photo Moderation
 window.photoModerationURL = page.includes(
   `${url}/performer/moderation/photo/moderation`

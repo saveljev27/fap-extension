@@ -125,7 +125,11 @@ const multipleComment = (shortIds) => {
   });
 };
 
-if (window.moderationURL || window.vrmoderationURL) {
+if (
+  window.moderationURL ||
+  window.vrmoderationURL ||
+  window.stopwordsModerationURL
+) {
   const shortIds = checkTimeAndType();
   multipleComment(shortIds);
 }
