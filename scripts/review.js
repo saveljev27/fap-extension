@@ -1,9 +1,4 @@
-const reviewUrl = document.URL;
-const reviewPage = reviewUrl.includes(
-  'https://panel.sexflix.com/video/moderation/reviewer-stats'
-);
-
-if (reviewPage) {
+if (window.reviewPage) {
   const rows = document.querySelectorAll(
     '.table-striped.table.table-sm tbody tr'
   );

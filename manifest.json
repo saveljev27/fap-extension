@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Faphouse Extension",
-  "description": "Reason, co-performer declines. Email and Producer Panel and Statuses on tab in SP. Tickets Buttons on Prod and User page. Published Video Alert. Monetization status and Internal Comments. Producer Comment in Photo moderation. Producer Comment and Short Video Validation in Multiple Moderation.",
+  "description": "Reason, co-performer declines. Email and Producer Panel and Statuses on tab in SP. Tickets Buttons on Prod and User page. Published Video Alert. Monetization status and Internal Comments. Producer Comment in Photo, Performer moderation. Producer Comment and Short Video Validation in Multiple Moderation.",
   "version": "0.2.5",
   "action": {
     "default_icon": "images/faphouse_16.png",
@@ -33,6 +33,7 @@
         "https://panel.stage.k8s.flixdev.com/*"
       ],
       "js": [
+        "scripts/globalconstants.js",
         "scripts/script.js",
         "scripts/sp.js",
         "scripts/queue.js",
@@ -41,7 +42,8 @@
         "scripts/monetization.js",
         "scripts/review.js",
         "scripts/photo.js",
-        "scripts/multipleModeration.js"
+        "scripts/multipleModeration.js",
+        "scripts/performer.js"
       ],
       "css": ["css/styles.css"]
     }

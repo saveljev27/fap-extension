@@ -1,5 +1,3 @@
-const ticketUrl = document.URL;
-const spUrl = ticketUrl.includes('https://support.faphouse.com/');
 const emailElement = document.querySelector('.sp-reply-all-recipients');
 const getSubmititedTitle = document.querySelector('.sp-title-description');
 
@@ -179,6 +177,6 @@ const producerEmailAndPanelFunctionality = async () => {
   } catch (error) {}
 };
 
-if (spUrl && emailElement) {
+if (window.supportPalPage && emailElement) {
   producerEmailAndPanelFunctionality();
 }

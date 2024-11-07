@@ -1,8 +1,3 @@
-const publishedModeration = document.URL;
-const publishedMultiple = publishedModeration.includes(
-  'https://panel.sexflix.com/video/multiple-moderation'
-);
-
 const fetchVideoStatus = async (id) => {
   const url = 'https://panel.sexflix.com/video/manage/update?id=' + id;
   try {
@@ -62,6 +57,6 @@ const videoIdToFetch = async () => {
   return published;
 };
 
-if (publishedMultiple) {
+if (window.publishedMultiple) {
   videoIdToFetch();
 }

@@ -1,11 +1,12 @@
-const moderationPage = document.URL;
-const moderationUrl = moderationPage.includes(
-  'https://panel.sexflix.com/video/multiple-moderation'
-);
-
 const videoBlocks = Array.from(
   document.querySelectorAll('.row.pt-3.multi-moderation-row')
 );
+
+const urlReg = (url) => {
+  return url.match(
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
+  );
+};
 
 // Check Video Length and Type
 
@@ -64,19 +65,30 @@ const multipleComment = (shortIds) => {
       const getVideoId = block.getAttribute('id').replace(/\D/g, '');
       const isShort = shortIds.includes(getVideoId);
       const alert = block.querySelector('.producer-comment__description');
-      const alertText = alert ? alert.innerText.trim() : null;
+      let alertText = alert ? alert.innerText.trim() : null;
+      const isHaveUrl = alertText && alertText.includes('https://');
+      if (isHaveUrl) {
+        const getHref = urlReg(alertText);
+        if (getHref) {
+          getHref.forEach((href) => {
+            if (!alertText.includes(`<a href="${href}"`)) {
+              const anchorTag = `<a href="${href}" target="_blank">${href}</a>`;
+              alertText = alertText.replace(href, anchorTag);
+            }
+          });
+          alert.innerHTML = alertText;
+        }
+      }
+
       if ((alert && alertText) || isShort) {
-        const commentText = alertText;
         return {
-          commentText,
+          commentText: alertText,
           id: getVideoId,
           short: isShort,
         };
       }
     })
     .filter(Boolean);
-
-  console.log(commentAlert);
 
   commentAlert.forEach((item) => {
     const modal = document.querySelector(`#video_info_modal_edit_${item?.id}`);
@@ -92,7 +104,7 @@ const multipleComment = (shortIds) => {
       commentTitle.classList.add('producer-comment__title');
       commentText.classList.add('producer-comment__description');
       commentTitle.innerText = 'Producer comment';
-      commentText.innerText = item.commentText;
+      commentText.innerHTML = item.commentText;
       suggestedTags.parentNode.insertAdjacentElement('beforeend', comment);
       comment.appendChild(commentTitle);
       comment.appendChild(commentText);
@@ -113,7 +125,7 @@ const multipleComment = (shortIds) => {
   });
 };
 
-if (moderationUrl) {
+if (window.moderationURL || window.vrmoderationURL) {
   const shortIds = checkTimeAndType();
   multipleComment(shortIds);
 }
