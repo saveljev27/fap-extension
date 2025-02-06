@@ -7,14 +7,27 @@ const urlReg = (url) => {
     /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
   );
 };
-
-// Check Video Length and Type
-
 const timeToSeconds = (time) => {
   const [h, m, s] = time.split(':');
   return parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s);
 };
+const createAlert = (text, suggestedTags) => {
+  const alert = document.createElement('div');
+  const alertTitle = document.createElement('p');
+  alert.classList.add('alert-danger', 'alert', 'multiple_comment');
+  alertTitle.classList.add('producer-comment__description', 'main_bold');
+  alertTitle.innerText = text;
+  suggestedTags.parentNode.insertAdjacentElement('beforeend', alert);
+  alert.appendChild(alertTitle);
+};
 
+const closestBlockId = (block) => {
+  return block
+    .closest('.row.pt-3.multi-moderation-row')
+    .getAttribute('id')
+    .replace(/\D/g, '');
+};
+// Check Video Length and Type
 const checkTimeAndType = () => {
   return Array.from(
     document.querySelectorAll(
@@ -34,22 +47,40 @@ const checkTimeAndType = () => {
         return th && th.innerText.includes('Account Type');
       });
 
-      if (lengthRow && accountTypeRow) {
+      const momentsTypeRow = lengthAndTypeHeaders.find((tr) => {
+        const th = tr.querySelector('th');
+        return th && th.innerText.includes('Moment');
+      });
+
+      if (lengthRow && accountTypeRow && !momentsTypeRow) {
         const lengthTd = lengthRow.querySelector('td');
         const accountTypeTd = accountTypeRow.querySelector('td');
 
         const formatTime = timeToSeconds(lengthTd.innerText);
         if (formatTime < 900 && accountTypeTd.innerText.trim() === 'business') {
+          lengthRow.style.color = 'red';
+          accountTypeRow.style.color = 'red';
           lengthTd.style.color = 'red';
-          lengthTd.style.fontWeight = 'bold';
           accountTypeTd.style.color = 'red';
+          lengthTd.style.fontWeight = 'bold';
           accountTypeTd.style.fontWeight = 'bold';
 
-          return block
-            .closest('.row.pt-3.multi-moderation-row')
-            .getAttribute('id')
-            .replace(/\D/g, '');
+          return {
+            id: closestBlockId(block),
+            type: 'video',
+          };
         }
+      } else if (momentsTypeRow) {
+        const momentTd = momentsTypeRow.querySelector('td');
+        momentTd.style.color = 'red';
+        momentsTypeRow.style.color = 'red';
+        momentsTypeRow.style.fontWeight = 'bold';
+        momentTd.style.fontWeight = 'bold';
+
+        return {
+          id: closestBlockId(block),
+          type: 'moment',
+        };
       }
 
       return null;
@@ -58,39 +89,49 @@ const checkTimeAndType = () => {
 };
 
 // Show Comment and Alert In Video Modal
-
-const multipleComment = (shortIds) => {
-  const commentAlert = videoBlocks
+const multipleComment = (shortOrMoment) => {
+  const alertAndNotify = videoBlocks
     .map((block) => {
       const getVideoId = block.getAttribute('id').replace(/\D/g, '');
-      const isShort = shortIds.includes(getVideoId);
-      const alert = block.querySelector('.producer-comment__description');
-      let alertText = alert ? alert.innerText.trim() : null;
-      const isHaveUrl = alertText && alertText.includes('https://');
+      const findShortOrMoment = shortOrMoment?.find(
+        (id) => id.id === getVideoId
+      );
+      const comment = block.querySelector('.producer-comment__description');
+      const xhamster = block.querySelector('.modification-request-notify');
+      let commentText = comment ? comment.innerText.trim() : null;
+      let xhamsterText = xhamster ? xhamster.innerText.trim() : null;
+      const isHaveUrl = commentText && commentText.includes('https://');
       if (isHaveUrl) {
-        const getHref = urlReg(alertText);
+        const getHref = urlReg(commentText);
         if (getHref) {
           getHref.forEach((href) => {
-            if (!alertText.includes(`<a href="${href}"`)) {
+            if (!commentText.includes(`<a href="${href}"`)) {
               const anchorTag = `<a href="${href}" target="_blank">${href}</a>`;
-              alertText = alertText.replace(href, anchorTag);
+              commentText = commentText.replace(href, anchorTag);
             }
           });
-          alert.innerHTML = alertText;
+          comment.innerHTML = commentText;
         }
       }
 
-      if ((alert && alertText) || isShort) {
+      if (
+        (comment && commentText) ||
+        findShortOrMoment ||
+        (xhamster && xhamsterText)
+      ) {
         return {
-          commentText: alertText,
           id: getVideoId,
-          short: isShort,
+          ...(commentText !== null && { commentText }),
+          ...(xhamsterText !== null && { xhamsterText: true }),
+          ...(findShortOrMoment !== undefined && {
+            type: findShortOrMoment?.type,
+          }),
         };
       }
     })
     .filter(Boolean);
 
-  commentAlert.forEach((item) => {
+  alertAndNotify.forEach((item) => {
     const modal = document.querySelector(`#video_info_modal_edit_${item?.id}`);
     if (!modal) return;
     const suggestedTags = modal.querySelector('.suggested-tags-wrap');
@@ -110,17 +151,20 @@ const multipleComment = (shortIds) => {
       comment.appendChild(commentText);
     }
 
-    if (item.short) {
-      const shortVideo = document.createElement('div');
-      const shortVideoTitle = document.createElement('p');
-      shortVideo.classList.add('alert-danger', 'alert', 'multiple_comment');
-      shortVideoTitle.classList.add(
-        'producer-comment__description',
-        'main_bold'
-      );
-      shortVideoTitle.innerText = 'Short Video';
-      suggestedTags.parentNode.insertAdjacentElement('beforeend', shortVideo);
-      shortVideo.appendChild(shortVideoTitle);
+    if (item.xhamsterText) {
+      const comment = document.createElement('div');
+      const commentText = document.createElement('p');
+      comment.classList.add('multiple-request-notify');
+      commentText.innerHTML =
+        'This video was imported from xHamster. You don`t need to check the documents of the performers. Just check content and meta-information';
+      suggestedTags.parentNode.insertAdjacentElement('beforeend', comment);
+      comment.appendChild(commentText);
+    }
+
+    if (item.type === 'video') {
+      createAlert('Short video', suggestedTags);
+    } else if (item.type === 'moment') {
+      createAlert('Moment', suggestedTags);
     }
   });
 };
@@ -130,6 +174,6 @@ if (
   window.vrmoderationURL ||
   window.stopwordsModerationURL
 ) {
-  const shortIds = checkTimeAndType();
-  multipleComment(shortIds);
+  const shortOrMoment = checkTimeAndType();
+  multipleComment(shortOrMoment);
 }

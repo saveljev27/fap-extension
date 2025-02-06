@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Faphouse Extension",
-  "description": "Reason, co-performer declines. Email and Producer Panel and Statuses on tab in SP. Tickets Buttons on Prod and User page. Published Video Alert. Monetization status and Internal Comments. Producer Comment in Photo, Performer moderation. Producer Comment and Short Video Validation in Multiple Moderation.",
-  "version": "0.2.5",
+  "name": "Faphouse ExtensionBeta",
+  "description": "Faphouse Extension for Admin and Support Panel",
+  "version": "0.2.6",
   "action": {
     "default_icon": "images/faphouse_16.png",
     "default_popup": "html/index.html"
@@ -16,15 +16,10 @@
     "48": "images/faphouse_48.png",
     "128": "images/faphouse_128.png"
   },
-  "permissions": ["scripting", "sidePanel"],
+  "permissions": ["sidePanel"],
   "side_panel": {
     "default_path": "html/swfpanel.html"
   },
-  "host_permissions": [
-    "https://panel.sexflix.com/*",
-    "https://support.faphouse.com/*",
-    "https://panel.stage.k8s.flixdev.com/*"
-  ],
   "content_scripts": [
     {
       "matches": [
@@ -43,7 +38,8 @@
         "scripts/review.js",
         "scripts/photo.js",
         "scripts/multipleModeration.js",
-        "scripts/performer.js"
+        "scripts/performer.js",
+        "scripts/singleModeration.js"
       ],
       "css": ["css/styles.css"]
     }

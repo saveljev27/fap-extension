@@ -35,3 +35,6 @@ window.reviewPage = page.includes(`${url}/video/moderation/reviewer-stats`);
 
 // SP Panel
 window.supportPalPage = page.includes('https://support.faphouse.com/');
+
+// Single Modeation
+window.singleModeration = page.includes(`${url}/video/moderation`);

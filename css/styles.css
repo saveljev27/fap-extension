@@ -111,7 +111,7 @@
 .queue_title {
   padding: 5px;
   border: 1px solid black;
-  text-align: center; /* Выровнять текст по правому краю */
+  text-align: center;
 }
 
 .queue_title {
@@ -281,4 +281,13 @@
   margin-top: 20px;
   display: block;
   max-width: auto;
+}
+
+/* Multiple Moderation */
+.multiple-request-notify {
+  padding: 15px 20px 15px 20px;
+  color: black;
+  margin: 20px 0px 20px 0px;
+  text-align: center;
+  border: 5px solid #3ad552;
 }
