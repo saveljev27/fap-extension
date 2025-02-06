@@ -1,5 +1,5 @@
 window.page = document.URL;
-const testMode = false;
+const testMode = true;
 const url = testMode
   ? 'https://panel.stage.k8s.flixdev.com'
   : 'https://panel.sexflix.com';
