@@ -92,14 +92,4 @@ const responseAndHandle = async () => {
   }
 };
 
-if (window.editingProducerURL || window.editingUserURL) {
-  responseAndHandle();
-}
-
-// Xhamster Tickets
-// const findXh = spData.find((el) => Object.values(el).includes('xHamster'));
-// if (findXh) {
-//   const xhBtn = createButton('Loading...', btnClass);
-//   updateSPInterfaceBtn(xhBtn, findXh, 'XH');
-//   parentElement.insertBefore(xhBtn, fpBtn.nextSibling);
-// }
+if (window.editingProducerURL || window.editingUserURL) responseAndHandle();

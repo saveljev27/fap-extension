@@ -5,6 +5,4 @@ const changeWidth = () => {
   });
 };
 
-if (window.singleModeration) {
-  changeWidth();
-}
+if (window.singleModeration) changeWidth();

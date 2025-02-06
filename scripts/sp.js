@@ -177,6 +177,4 @@ const producerEmailAndPanelFunctionality = async () => {
   } catch (error) {}
 };
 
-if (window.supportPalPage && emailElement) {
-  producerEmailAndPanelFunctionality();
-}
+if (window.supportPalPage && emailElement) producerEmailAndPanelFunctionality();

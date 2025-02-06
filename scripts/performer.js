@@ -51,6 +51,4 @@ const showComment = async () => {
   }
 };
 
-if (window.performerModeration) {
-  showComment();
-}
+if (window.performerModeration) showComment();

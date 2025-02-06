@@ -57,6 +57,4 @@ const videoIdToFetch = async () => {
   return published;
 };
 
-if (window.publishedMultiple) {
-  videoIdToFetch();
-}
+if (window.publishedMultiple) videoIdToFetch();

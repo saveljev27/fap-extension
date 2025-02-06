@@ -10,8 +10,11 @@ window.performerModeration = page.includes(`${url}/performer/moderation/`);
 // Video Moderation
 window.moderationURL = page.includes(`${url}/video/multiple-moderation`);
 
-// VR moderation
+// VR Moderation
 window.vrmoderationURL = page.includes(`${url}/vr/moderation/video`);
+
+// Single Moderation
+window.singleModeration = page.includes(`${url}/video/moderation`);
 
 // Stop Words Moderation
 window.stopwordsModerationURL = page.includes(
@@ -35,6 +38,3 @@ window.reviewPage = page.includes(`${url}/video/moderation/reviewer-stats`);
 
 // SP Panel
 window.supportPalPage = page.includes('https://support.faphouse.com/');
-
-// Single Modeation
-window.singleModeration = page.includes(`${url}/video/moderation`);

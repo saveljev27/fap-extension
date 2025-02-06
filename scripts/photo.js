@@ -56,6 +56,4 @@ const showComments = async () => {
   });
 };
 
-if (producers.length) {
-  showComments();
-}
+if (producers.length) showComments();

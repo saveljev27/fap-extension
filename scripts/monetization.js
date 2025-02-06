@@ -129,10 +129,6 @@ const showInternalComments = async () => {
   });
 };
 
-if (videoIdBlocks.length && qualityBlocks.length) {
-  showMonetizationStatuses();
-}
+if (videoIdBlocks.length && qualityBlocks.length) showMonetizationStatuses();
 
-if (producerBlocks.length) {
-  showInternalComments();
-}
+if (producerBlocks.length) showInternalComments();

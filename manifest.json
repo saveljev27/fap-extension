@@ -39,7 +39,8 @@
         "scripts/photo.js",
         "scripts/multipleModeration.js",
         "scripts/performer.js",
-        "scripts/singleModeration.js"
+        "scripts/singleModeration.js",
+        "scripts/vrModeration.js"
       ],
       "css": ["css/styles.css"]
     }
