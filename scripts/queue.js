@@ -40,6 +40,14 @@ const urls = [
     elementId: 'onlyfans',
   },
   {
+    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=fansly',
+    elementId: 'fansly',
+  },
+  {
+    url: 'https://panel.sexflix.com/video/moderation/index?&transferSource=manyvids',
+    elementId: 'manyvids',
+  },
+  {
     url: 'https://panel.sexflix.com/transferredcontent/moderation/photo',
     elementId: 'transfersphoto',
   },
