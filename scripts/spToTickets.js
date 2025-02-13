@@ -5,15 +5,12 @@ const createButton = (text, className) => {
   return button;
 };
 
-const updateSPInterfaceBtn = (button, data, text) => {
-  if (data) {
-    const id = data.DT_RowId;
-    button.innerText = `${text} Tickets`;
+const updateSPInterfaceBtn = (button, id) => {
+  if (id) {
+    button.innerText = `SP Tickets`;
     button.classList.remove('disabled');
     button.href = `https://support.faphouse.com/en/staff/user/manage/${id}/ticket`;
     button.target = '_blank';
-  } else {
-    button.innerText = 'Not found';
   }
 };
 
@@ -84,9 +81,13 @@ const responseAndHandle = async () => {
   parentElement.insertBefore(fpBtn, mainBtn.nextSibling);
   try {
     const email = await fetchEmail(dataId, type);
-    const spData = await fetchDataInSp(email);
-    const findFp = spData.find((el) => Object.values(el).includes('FapHouse'));
-    updateSPInterfaceBtn(fpBtn, findFp, 'SP');
+    const spData = (await fetchDataInSp(email))[0];
+    if (!spData) {
+      fpBtn.textContent = 'Not found';
+      return;
+    }
+    const spUserId = spData.DT_RowId;
+    updateSPInterfaceBtn(fpBtn, spUserId);
   } catch (error) {
     fpBtn.textContent = 'No access to SP. Please login and try again.';
   }
