@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Faphouse ExtensionBeta",
+  "name": "Faphouse Extension",
   "description": "Faphouse Extension for Admin and Support Panel",
   "version": "0.2.6",
   "action": {
