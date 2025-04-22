@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Faphouse Extension",
   "description": "Faphouse Extension for Admin and Support Panel",
-  "version": "0.2.7.2",
+  "version": "0.2.7.3",
   "action": {
     "default_icon": "images/faphouse_16.png",
     "default_popup": "html/index.html"

@@ -18,58 +18,67 @@
     document.body.appendChild(popup);
     popup.appendChild(popupImg);
 
-    const initialX = window.innerWidth / 2;
-    const initialY = window.innerHeight / 2;
     let lastMouseX = 0;
     let lastMouseY = 0;
-    mousemove(initialX, initialY, popup);
+    let popupDelay = null;
 
     document.addEventListener('mouseover', function (event) {
-      lastMouseX = event.pageX;
-      lastMouseY = event.pageY;
+      popup.style.display = 'none';
       let target = event.target;
       let parentHref = target?.parentElement?.href;
+      let href = target?.href;
       const isImage = target.tagName === 'IMG';
-      const isImageLink = /\.(jpg|jpeg|png|gif|svg)$/i.test(target.src);
+      const isLink = target.tagName === 'A';
+      const isImageSrc = /\.(jpg|jpeg|png|gif|svg)$/i.test(target.src);
+      const isImageLink = /\.(jpg|jpeg|png|gif|svg)$/i.test(target.href);
       const isValidHref =
         parentHref &&
         parentHref.startsWith('http') &&
         !parentHref.includes('/video');
 
       if (isImage) {
-        if (isImageLink && isValidHref) {
-          popupImg.onload = () => {
+        popupImg.onload = () => {
+          popupDelay = setTimeout(() => {
             const { newWidth, newHeight } = rescale(popup, scale, popupImg);
             popupImg.style.width = newWidth + 'px';
             popupImg.style.height = newHeight + 'px';
             mousemove(lastMouseX, lastMouseY, popup);
-          };
+          }, 500);
+        };
+        popupImg.src = parentHref;
+        if (isImageSrc && isValidHref) {
           popupImg.src = parentHref;
         } else {
           popupImg.src = target.src;
-          const { newWidth, newHeight } = rescale(popup, scale, target);
-          popupImg.style.width = newWidth + 'px';
-          popupImg.style.height = newHeight + 'px';
         }
       }
 
-      if (isImage && !parentHref) {
-        popupImg.src = target.src;
-        const { newWidth, newHeight } = rescale(popup, scale, target);
-        popupImg.style.width = newWidth + 'px';
-        popupImg.style.height = newHeight + 'px';
+      if (isLink && isImageLink) {
+        popupImg.onload = () => {
+          popupDelayTimeout = setTimeout(() => {
+            const { newWidth, newHeight } = rescale(popup, scale, popupImg);
+            popupImg.style.width = newWidth + 'px';
+            popupImg.style.height = newHeight + 'px';
+            mousemove(lastMouseX, lastMouseY, popup);
+          }, 500);
+        };
+        popupImg.src = href;
       }
     });
 
     document.addEventListener('mousemove', function (event) {
-      let x = event.pageX;
-      let y = event.pageY;
-      mousemove(x, y, popup);
+      lastMouseX = event.pageX;
+      lastMouseY = event.pageY;
+      mousemove(lastMouseX, lastMouseY, popup);
     });
 
     document.addEventListener('mouseout', function (event) {
       if (event.target.tagName === 'IMG') {
         popup.style.display = 'none';
+      }
+      if (popupDelay) {
+        clearTimeout(popupDelay);
+        popupDelay = null;
       }
     });
   };
