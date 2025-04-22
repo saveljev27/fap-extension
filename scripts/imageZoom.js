@@ -55,7 +55,7 @@
 
       if (isLink && isImageLink) {
         popupImg.onload = () => {
-          popupDelayTimeout = setTimeout(() => {
+          popupDelay = setTimeout(() => {
             const { newWidth, newHeight } = rescale(popup, scale, popupImg);
             popupImg.style.width = newWidth + 'px';
             popupImg.style.height = newHeight + 'px';
@@ -73,7 +73,7 @@
     });
 
     document.addEventListener('mouseout', function (event) {
-      if (event.target.tagName === 'IMG') {
+      if (event.target.tagName === 'IMG' || event.target.tagName === 'A') {
         popup.style.display = 'none';
       }
       if (popupDelay) {
