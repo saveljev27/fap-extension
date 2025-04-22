@@ -20,20 +20,31 @@
 
     const initialX = window.innerWidth / 2;
     const initialY = window.innerHeight / 2;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
     mousemove(initialX, initialY, popup);
 
     document.addEventListener('mouseover', function (event) {
+      lastMouseX = event.pageX;
+      lastMouseY = event.pageY;
       let target = event.target;
       let parentHref = target?.parentElement?.href;
-      let x = event.pageX;
-      let y = event.pageY;
+      const isImage = target.tagName === 'IMG';
+      const isImageLink = /\.(jpg|jpeg|png|gif|svg)$/i.test(target.src);
+      const isValidHref =
+        parentHref &&
+        parentHref.startsWith('http') &&
+        !parentHref.includes('/video');
 
-      if (target.tagName === 'IMG' && parentHref) {
-        if (parentHref !== 'javascript:void(0)') {
-          popupImg.src = target.parentElement.href;
-          const { newWidth, newHeight } = rescale(popup, scale, target);
-          popupImg.style.width = newWidth + 'px';
-          popupImg.style.height = newHeight + 'px';
+      if (isImage) {
+        if (isImageLink && isValidHref) {
+          popupImg.onload = () => {
+            const { newWidth, newHeight } = rescale(popup, scale, popupImg);
+            popupImg.style.width = newWidth + 'px';
+            popupImg.style.height = newHeight + 'px';
+            mousemove(lastMouseX, lastMouseY, popup);
+          };
+          popupImg.src = parentHref;
         } else {
           popupImg.src = target.src;
           const { newWidth, newHeight } = rescale(popup, scale, target);
@@ -42,7 +53,7 @@
         }
       }
 
-      if (target.tagName === 'IMG' && !parentHref) {
+      if (isImage && !parentHref) {
         popupImg.src = target.src;
         const { newWidth, newHeight } = rescale(popup, scale, target);
         popupImg.style.width = newWidth + 'px';
@@ -69,13 +80,15 @@
     let newWidth = target.naturalWidth * scaleFactor;
     let newHeight = target.naturalHeight * scaleFactor;
 
-    if (newWidth > 800) {
-      newWidth = 800;
-      newHeight = (800 / target.naturalWidth) * target.naturalHeight;
+    let maxSize = scaleFactor * 300;
+
+    if (newWidth > maxSize) {
+      newWidth = maxSize;
+      newHeight = (maxSize / target.naturalWidth) * target.naturalHeight;
     }
-    if (newHeight > 800) {
-      newHeight = 800;
-      newWidth = (800 / target.naturalHeight) * target.naturalWidth;
+    if (newHeight > maxSize) {
+      newHeight = maxSize;
+      newWidth = (maxSize / target.naturalHeight) * target.naturalWidth;
     }
 
     return { newHeight, newWidth };
