@@ -5,6 +5,18 @@ const fetchParams = {
   },
 };
 
+chrome.storage.local.get('scripts', (data) => {
+  if (!data.scripts) {
+    const defaultScripts = {
+      singleModeration: true,
+      imageZoom: true,
+      scaleValue: 2,
+    };
+
+    chrome.storage.local.set({ scripts: defaultScripts }, () => {});
+  }
+});
+
 // Sidebar
 chrome.runtime.onMessage.addListener(async (message, sender) => {
   if (
@@ -140,6 +152,47 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     fetchVideoStatus(request.url)
       .then((html) => sendResponse({ html }))
       .catch((error) => sendResponse({ error: error.toString() }));
+    return true;
+  }
+});
+
+// Settings
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'toggleScript') {
+    const scriptName = message.script;
+
+    chrome.storage.local.get('scripts', (data) => {
+      let scripts = data.scripts || {};
+      scripts[scriptName] = !scripts[scriptName];
+
+      chrome.storage.local.set({ scripts }, () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          if (scripts[scriptName]) {
+            chrome.scripting.executeScript({
+              target: { tabId: tabs[0].id },
+              files: [`scripts/${scriptName}.js`],
+            });
+          }
+        });
+        sendResponse({ success: true });
+      });
+    });
+
+    return true;
+  }
+
+  // Scale
+  if (message.action === 'toggleScale') {
+    const scaleValue = message.scale;
+
+    chrome.storage.local.get('scripts', (data) => {
+      let scripts = data.scripts || {};
+      scripts.scaleValue = scaleValue;
+      chrome.storage.local.set({ scripts }, () => {
+        sendResponse({ success: true, scaleValue: scripts.scaleValue });
+      });
+    });
+
     return true;
   }
 });

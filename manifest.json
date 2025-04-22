@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Faphouse Extension",
   "description": "Faphouse Extension for Admin and Support Panel",
-  "version": "0.2.6",
+  "version": "0.2.7.1",
   "action": {
     "default_icon": "images/faphouse_16.png",
     "default_popup": "html/index.html"
@@ -16,10 +16,15 @@
     "48": "images/faphouse_48.png",
     "128": "images/faphouse_128.png"
   },
-  "permissions": ["sidePanel"],
+  "permissions": ["storage", "scripting", "sidePanel"],
   "side_panel": {
     "default_path": "html/swfpanel.html"
   },
+  "host_permissions": [
+    "https://panel.sexflix.com/*",
+    "https://support.faphouse.com/*",
+    "https://panel.stage.k8s.flixdev.com/*"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -40,7 +45,8 @@
         "scripts/multipleModeration.js",
         "scripts/performer.js",
         "scripts/singleModeration.js",
-        "scripts/vrModeration.js"
+        "scripts/vrModeration.js",
+        "scripts/imageZoom.js"
       ],
       "css": ["css/styles.css"]
     }

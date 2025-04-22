@@ -83,7 +83,7 @@ const responseAndHandle = async () => {
     const email = await fetchEmail(dataId, type);
     const spData = (await fetchDataInSp(email))[0];
     if (!spData) {
-      fpBtn.textContent = 'Not found';
+      fpBtn.textContent = 'No Registered Tickets';
       return;
     }
     const spUserId = spData.DT_RowId;
